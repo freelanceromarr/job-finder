@@ -9,7 +9,7 @@ const Home = () => {
 
   const dispatch = useDispatch();
   const {jobs, isLoading, isError} = useSelector(state=>state.jobs);
-  const {filter, sorting} = useSelector(state=>state.filters);
+  const {filter, sorting, search} = useSelector(state=>state.filters);
   useEffect( ()=>{
     dispatch(getJobs())
   } ,[dispatch])
@@ -41,7 +41,7 @@ const Home = () => {
     if (filter ==='remote') {
       return job.type === 'Remote';
   }
-    }).sort((a,b)=>{
+    }).filter(job=>job.title.match(search)).sort((a,b)=>{
       if (sorting ==='lowToHigh') {
         return Number(a.salary) - Number(b.salary)
       }else if (sorting ==='highToLow') {
