@@ -16,3 +16,7 @@ export const updateJob = async (id, data) => {
     const response = await axios.put(`/jobs/${id}`, data);
     return response.data;
 };
+export const deleteJob = async (id) => {
+    await axios.delete(`/jobs/${id}`);
+    return id;
+};

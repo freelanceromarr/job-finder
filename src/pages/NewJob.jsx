@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addJobs } from "../features/jobs/jobSlice";
+import { useNavigate } from "react-router-dom";
 
 const NewJob = () => {
   const [input, setInput] = useState({
@@ -10,10 +11,12 @@ const NewJob = () => {
     deadline: "",
   });
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   //submit form
   const formHandler = (e) => {
     e.preventDefault();
     dispatch(addJobs(input))
+    navigate("/")
 
   }
   return (

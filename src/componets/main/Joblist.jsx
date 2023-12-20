@@ -1,7 +1,10 @@
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { removeJob } from "../../features/jobs/jobSlice";
 
 const JobList = ({job}) => {
   const {id, title, type, salary, deadline} = job;
+  const dispatch = useDispatch();
   return (
     <div class="jobs-list">
       {/* <!-- Single Job 1--> */}
@@ -35,7 +38,7 @@ const JobList = ({job}) => {
           </span>
 
           <span class="sm:ml-3">
-            <button type="button" class="lws-delete btn btn-danger ">
+            <button onClick={()=>dispatch(removeJob(id))} type="button" class="lws-delete btn btn-danger ">
               <i class="fa-solid fa-trash text-gray-300 -ml-1 mr-2"></i>
               Delete
             </button>
