@@ -1,9 +1,26 @@
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addJobs } from "../features/jobs/jobSlice";
+
 const NewJob = () => {
+  const [input, setInput] = useState({
+    title: "",
+    type: "",
+    salary: "",
+    deadline: "",
+  });
+  const dispatch = useDispatch()
+  //submit form
+  const formHandler = (e) => {
+    e.preventDefault();
+    dispatch(addJobs(input))
+
+  }
   return (
     <main class="max-w-3xl rounded-lg mx-auto relative z-20 p-10 xl:max-w-none bg-[#1E293B]">
       <h1 class="mb-10 text-center lws-section-title">Add New Job</h1>
       <div class="max-w-3xl mx-auto">
-        <form class="space-y-6">
+        <form class="space-y-6" onSubmit={formHandler}>
           <div class="fieldContainer">
             <label
               for="lws-JobTitle"
@@ -11,7 +28,12 @@ const NewJob = () => {
             >
               Job Title
             </label>
-            <select id="lws-JobTitle" name="lwsJobTitle" required>
+            <select
+              onChange={(e) => setInput({ ...input, title: e.target.value })}
+              id="lws-JobTitle"
+              name="lwsJobTitle"
+              required
+            >
               <option value="" hidden selected>
                 Select Job
               </option>
@@ -34,7 +56,12 @@ const NewJob = () => {
 
           <div class="fieldContainer">
             <label for="lws-JobType">Job Type</label>
-            <select id="lws-JobType" name="lwsJobType" required>
+            <select
+              onChange={(e) => setInput({ ...input, type: e.target.value })}
+              id="lws-JobType"
+              name="lwsJobType"
+              required
+            >
               <option value="" hidden selected>
                 Select Job Type
               </option>
@@ -49,6 +76,7 @@ const NewJob = () => {
             <div class="flex border rounded-md shadow-sm border-slate-600">
               <span class="input-tag">BDT</span>
               <input
+                onChange={(e) => setInput({ ...input, salary: e.target.value })}
                 type="number"
                 name="lwsJobSalary"
                 id="lws-JobSalary"
@@ -62,6 +90,7 @@ const NewJob = () => {
           <div class="fieldContainer">
             <label for="lws-JobDeadline">Deadline</label>
             <input
+              onChange={(e) => setInput({ ...input, deadline: e.target.value })}
               type="date"
               name="lwsJobDeadline"
               id="lws-JobDeadline"

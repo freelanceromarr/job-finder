@@ -1,31 +1,32 @@
 import { Link } from "react-router-dom";
 
-const JobList = () => {
+const JobList = ({job}) => {
+  const {id, title, type, salary, deadline} = job;
   return (
     <div class="jobs-list">
       {/* <!-- Single Job 1--> */}
       <div class="lws-single-job">
         <div class="flex-1 min-w-0">
-          <h2 class="lws-title">Back End Developer</h2>
+          <h2 class="lws-title">{title}</h2>
           <div class="job-footers">
             <div class="lws-type">
               {/* <!-- Fulltime - #FF8A00,  --><!-- Internship - #FF5757,  --><!-- Remote - #56E5C4,  --> */}
               <i class="fa-solid fa-stop !text-[#FF8A00] text-lg mr-1.5"></i>
-              Full-time
+              {type}
             </div>
             <div class="lws-salary">
               <i class="fa-solid fa-bangladeshi-taka-sign text-slate-400 text-lg mr-1.5"></i>
-              BDT 40,000
+              BDT {salary}
             </div>
             <div class="lws-deadline">
               <i class="fa-regular fa-calendar text-slate-400 text-lg mr-1.5"></i>
-              Closing on 2022-12-31
+              {deadline}
             </div>
           </div>
         </div>
         <div class="mt-5 flex lg:mt-0 lg:ml-4">
           <span class="hidden sm:block">
-            <Link to={`/job/edit/1`}>
+            <Link to={`/job/edit/${id}`}>
               <button type="button" class="lws-edit btn btn-primary">
                 <i class="fa-solid fa-pen text-gray-300 -ml-1 mr-2"></i>
                 Edit

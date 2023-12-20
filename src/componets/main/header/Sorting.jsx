@@ -1,9 +1,13 @@
+import { useDispatch } from "react-redux";
+import { sorting } from "../../../features/filters/filterSlice";
+
 const Sorting = () => {
+    const dispatch = useDispatch()
     return ( 
-        <select id="lws-sort" name="sort" autocomplete="sort" class="flex-1">
-            <option>Default</option>
-            <option>Salary (Low to High)</option>
-            <option>Salary (High to Low)</option>
+        <select onChange={(e)=>dispatch(sorting(e.target.value))} id="lws-sort" name="sort" autocomplete="sort" class="flex-1">
+            <option value="default">Default</option>
+            <option value="lowToHigh" >Salary (Low to High)</option>
+            <option value="highToLow" >Salary (High to Low)</option>
         </select>
      );
 }
